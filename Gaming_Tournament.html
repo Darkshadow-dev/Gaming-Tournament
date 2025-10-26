@@ -227,17 +227,21 @@ footer::before {
 </div>
 
 <!-- Registration Form (sends to your email) -->
-<form action="https://formsubmit.co/gaming.tournament12@gmail.com" method="POST">
-  <h3>Register Now</h3>
-  <input type="hidden" name="_captcha" value="false">
-  <input type="hidden" name="_subject" value="LEVEL UP Tournament Registration">
+<form onsubmit="sendMail(event)">
+    <h3>Register Now</h3>
+    
+    <label for="name">Your Name:</label>
+    <input type="text" id="name" placeholder="Enter your name" required>
 
-  <input type="text" name="Name" placeholder="Your Name" required>
-  <input type="email" name="Email" placeholder="Your Email" required>
-  <input type="text" name="GameTag" placeholder="Your Game Tag" required>
+    <label for="email">Your Email:</label>
+    <input type="email" id="email" placeholder="Enter your email" required>
 
-  <input type="submit" value="Submit Registration">
+    <label for="gametag">Game Tag:</label>
+    <input type="text" id="gametag" placeholder="Enter your game tag" required>
+
+    <button type="submit">Send Registration</button>
 </form>
+
 
 
 <footer>
