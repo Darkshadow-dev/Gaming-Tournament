@@ -274,22 +274,22 @@ setInterval(()=>{
   const seconds = Math.floor((distance % (1000*60))/1000);
   countdown.innerHTML = `Starts In: ${days}d ${hours}h ${minutes}m ${seconds}s`;
 },1000);
-function sendMail(e) {
-    e.preventDefault(); // prevent form from submitting normally
+        function sendMail(form) {
+            const name = document.getElementById("name").value;
+            const email = document.getElementById("email").value;
+            const subject = document.getElementById("subject").value;
+            const message = document.getElementById("message").value;
 
-    const name = document.getElementById("name").value;
-    const email = document.getElementById("email").value;
-    const gametag = document.getElementById("gametag").value;
+            // Format mailto link
+            const mailtoLink = `mailto:guidecommunity.contacts@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(
+                "Name: " + name + "\n" +
+                "Email: " + email + "\n\n" +
+                "Message:\n" + message
+            )}`;
 
-    const subject = "LEVEL UP Tournament Registration";
-    const body = `Name: ${name}\nEmail: ${email}\nGame Tag: ${gametag}`;
-
-    // Open default mail client
-    window.location.href = `mailto:gaming.tournament12@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-
-    // Optionally, reset form
-    e.target.reset();
-}
+            // Open user's email client
+            window.location.href = mailtoLink;
+        }
 </script>
 
 </body>
