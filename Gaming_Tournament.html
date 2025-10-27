@@ -227,22 +227,18 @@ footer::before {
 </div>
 
 <!-- Registration Form (sends to your email) -->
-<form onsubmit="sendMail(form)">
-    <h3>Register Now</h3>
-    
-    <label for="name">Your Name:</label>
-    <input type="text" id="name" placeholder="Enter your name" required>
+<form id="registerForm">
+  <label for="name">Your Name:</label>
+  <input type="text" id="name" placeholder="Enter your name" required>
 
-    <label for="email">Your Email:</label>
-    <input type="email" id="email" placeholder="Enter your email" required>
+  <label for="email">Your Email:</label>
+  <input type="email" id="email" placeholder="Enter your email" required>
 
-    <label for="gametag">Game Tag:</label>
-    <input type="text" id="gametag" placeholder="Enter your game tag" required>
+  <label for="subject">Username:</label>
+  <input type="text" id="subject" placeholder="Enter your username" required>
 
-    <button type="submit">Send Registration</button>
+  <button type="submit">Send Message</button>
 </form>
-
-
 
 <footer>
   <p>© 2025 LEVEL UP Tournament — All Rights Reserved</p>
@@ -254,45 +250,54 @@ footer::before {
 window.onload = () => {
   // === QR Code ===
   const qrCanvas = document.getElementById('qrcode');
-  QRCode.toCanvas(qrCanvas, 'https://www.instagram.com/game_tournaments1', {
-    color: { dark: '#00ffff', light: '#00000000' },
-    width: 200
-  });
+  if (qrCanvas) {
+    QRCode.toCanvas(qrCanvas, 'https://www.instagram.com/game_tournaments1', {
+      color: { dark: '#00ffff', light: '#00000000' },
+      width: 200
+    });
+  }
 
   // === Countdown Timer ===
   const eventDate = new Date("2025-12-12T00:00:00").getTime();
   const countdown = document.getElementById("countdown");
-  setInterval(() => {
-    const now = new Date().getTime();
-    const distance = eventDate - now;
-    if (distance < 0) {
-      countdown.innerHTML = "🎮 The Tournament Has Started!";
-      return;
-    }
-    const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-    const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-    const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-    const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-    countdown.innerHTML = `Starts In: ${days}d ${hours}h ${minutes}m ${seconds}s`;
-  }, 1000);
+  if (countdown) {
+    setInterval(() => {
+      const now = new Date().getTime();
+      const distance = eventDate - now;
+      if (distance < 0) {
+        countdown.innerHTML = "🎮 The Tournament Has Started!";
+        return;
+      }
+      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+      countdown.innerHTML = `Starts In: ${days}d ${hours}h ${minutes}m ${seconds}s`;
+    }, 1000);
+  }
+
+  // === Form Handler ===
+  const form = document.getElementById("registerForm");
+  form.addEventListener("submit", (e) => {
+    e.preventDefault(); // stop page reload
+
+    const name = document.getElementById("name").value.trim();
+    const email = document.getElementById("email").value.trim();
+    const username = document.getElementById("subject").value.trim();
+
+    const body = `
+Name: ${name}
+Email: ${email}
+Username: ${username}
+    `;
+
+    // mailto link
+    const mailtoLink = `mailto:gaming.tournament12@gmail.com?subject=LEVEL UP Registration&body=${encodeURIComponent(body)}`;
+    window.location.href = mailtoLink;
+  });
 };
-        function sendMail(form) {
-            const name = document.getElementById("name").value;
-            const email = document.getElementById("email").value;
-            const subject = document.getElementById("subject").value;
-            const message = document.getElementById("message").value;
-
-            // Format mailto link
-            const mailtoLink = `mailto:guidecommunity.contacts@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(
-                "Name: " + name + "\n" +
-                "Email: " + email + "\n\n" +
-                "Message:\n" + message
-            )}`;
-
-            // Open user's email client
-            window.location.href = mailtoLink;
-        }
 </script>
+
 
 </body>
 </html>
