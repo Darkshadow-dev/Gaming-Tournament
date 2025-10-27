@@ -1,1 +1,298 @@
-<!DOCTYPE html> <html lang="en"> <head> <meta charset="UTF-8"> <meta name="viewport" content="width=device-width, initial-scale=1.0"> <title>LEVEL UP - Gaming Tournament 2025</title> <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&display=swap" rel="stylesheet"> <style> * {margin:0;padding:0;box-sizing:border-box;} body { font-family:'Orbitron',sans-serif; color:#00ffff; background:#010106; overflow-x:hidden; position:relative; min-height:100vh; } /* ===== Animated Background ===== */ body::before { content:""; position:fixed; top:0;left:0; width:200%; height:200%; background: radial-gradient(circle at 30% 30%,rgba(0,255,255,0.3),transparent 70%), radial-gradient(circle at 70% 70%,rgba(255,0,255,0.3),transparent 70%); animation:move-bg 10s infinite alternate; z-index:-2; } @keyframes move-bg { from{transform:translate(-10%,-10%) scale(1);} to{transform:translate(10%,10%) scale(1.2);} } body::after { content:""; position:fixed;inset:0; background: repeating-linear-gradient(0deg,rgba(0,255,255,0.05) 0 1px,transparent 1px 50px), repeating-linear-gradient(90deg,rgba(255,0,255,0.05) 0 1px,transparent 1px 50px); z-index:-1; } /* ===== Header ===== */ header { text-align:center; padding:50px 20px 30px; } .logo { width:180px; animation:pulse 3s infinite alternate; filter:drop-shadow(0 0 25px #00ffff); } @keyframes pulse { from{filter:drop-shadow(0 0 10px #00ffff);} to{filter:drop-shadow(0 0 35px #ff00ff);} } h1 { font-size:2.5em; margin-top:20px; text-shadow:0 0 25px #00ffff,0 0 50px #0077ff; } h2 { font-size:1.3em; color:#ff00ff; text-shadow:0 0 20px #ff00ff; margin-top:10px; } p { font-size:1.1em; color:#fff; margin-top:5px; } /* ===== Centered Countdown ===== */ #countdown { display:flex; justify-content:center; align-items:center; text-align:center; font-size:1.7em; margin:30px auto; color:#00ffff; text-shadow:0 0 20px #00ffff; animation:glow 2s infinite alternate; } @keyframes glow { from{text-shadow:0 0 10px #00ffff;} to{text-shadow:0 0 25px #ff00ff;} } /* ===== QR Section ===== */ .qr { text-align:center; margin:40px auto; padding:25px; width:fit-content; background:rgba(255,255,255,0.07); border-radius:20px; box-shadow:0 0 30px #00ffff; backdrop-filter:blur(5px); transition:0.5s; } .qr:hover { transform:scale(1.05); box-shadow:0 0 40px #ff00ff; } .qr h3 { color:#00ffff; margin-bottom:15px; } /* ===== Buttons ===== */ button, input[type=submit] { margin-top:20px; padding:15px 50px; border:none; border-radius:50px; font-size:1.2em; font-weight:bold; background:linear-gradient(90deg,#00ffff,#0077ff); color:#000; box-shadow:0 0 30px #00ffff; cursor:pointer; transition:0.3s; } button:hover, input[type=submit]:hover { transform:scale(1.1); box-shadow:0 0 40px #ff00ff; background:linear-gradient(90deg,#ff00ff,#00ffff); } /* ===== Registration Form ===== */ form { width:90%; max-width:400px; margin:50px auto; background:rgba(255,255,255,0.07); padding:25px; border-radius:20px; box-shadow:0 0 25px #00ffff; backdrop-filter:blur(6px); } form h3 { color:#ff00ff; margin-bottom:15px; text-shadow:0 0 15px #ff00ff; } input { width:100%; padding:12px; margin:8px 0; border:none; border-radius:8px; background:rgba(0,0,0,0.6); color:#00ffff; font-size:1em; outline:none; box-shadow:0 0 10px #00ffff inset; } input:focus { box-shadow:0 0 15px #ff00ff inset; } form input[type=submit] { width:100%; margin-top:15px; } /* ===== Footer ===== */ footer { text-align:center; color:#aaa; font-size:0.9em; padding:40px 10px 20px; background:rgba(255,255,255,0.05); box-shadow:0 0 20px #00ffff inset; position:relative; } footer::before { content:""; position:absolute; top:0; left:50%; width:60%; height:1px; background:linear-gradient(90deg,transparent,#00ffff,transparent); transform:translateX(-50%); } /* ===== Responsive ===== */ @media (max-width:600px){ h1{font-size:2em;} .qr{width:80%;} .logo{width:140px;} button,input[type=submit]{width:80%;font-size:1em;} } /* Hide default scrollbar */ ::-webkit-scrollbar { display: none; } </style> </head> <body> <header> <!-- Replace with your logo --> <img src="LEVEL UP.png" alt="LEVEL UP Logo" class="logo"> <h1>LEVEL UP Gaming Tournament 2025</h1> <h2>Location: Mostar</h2> <p>Date: 12.12.2025</p> </header> <!-- Centered Countdown --> <div id="countdown">Loading countdown...</div> <!-- QR Code Section --> <section class="qr"> <h3>📱 Scan to Sign Up</h3> <canvas id="qrcode"></canvas> </section> <div style="text-align:center;"> <button onclick="window.open('https://www.instagram.com/game_tournaments1','_blank')"> Go to Instagram </button> </div> <div style="text-align:center;"> <button onclick="window.open('https://forms.gle/4No5vvWbg5rmR8vN7')"> Go to our forum </button> </div> <!-- Registration Form (sends to your email) --> <form onsubmit="sendMail(event)"> <h3>Register Now</h3> <label for="name">Your Name:</label> <input type="text" id="name" placeholder="Enter your name" required> <label for="email">Your Email:</label> <input type="email" id="email" placeholder="Enter your email" required> <label for="gametag">Game Tag:</label> <input type="text" id="gametag" placeholder="Enter your game tag" required> <button type="submit">Send Registration</button> </form> <footer> <p>© 2025 LEVEL UP Tournament — All Rights Reserved</p> <p>Follow us for updates and live event coverage.</p> </footer> <!-- ===== Scripts ===== --> <script src="https://cdn.jsdelivr.net/npm/qrcode/build/qrcode.min.js"></script> <script> // === QR Code === const qrCanvas = document.getElementById('qrcode'); QRCode.toCanvas(qrCanvas, 'https://www.instagram.com/game_tournaments1', { color:{dark:'#00ffff',light:'#00000000'},width:200 }); // === Countdown Timer === const eventDate = new Date("2025-12-12T00:00:00").getTime(); const countdown = document.getElementById("countdown"); setInterval(()=>{ const now = new Date().getTime(); const distance = eventDate - now; if(distance < 0){ countdown.innerHTML = "🎮 The Tournament Has Started!"; return; } const days = Math.floor(distance / (1000*60*60*24)); const hours = Math.floor((distance % (1000*60*60*24))/(1000*60*60)); const minutes = Math.floor((distance % (1000*60*60))/(1000*60)); const seconds = Math.floor((distance % (1000*60))/1000); countdown.innerHTML = Starts In: ${days}d ${hours}h ${minutes}m ${seconds}s; },1000); function sendMail(form) { const name = document.getElementById("name").value; const email = document.getElementById("email").value; const subject = document.getElementById("subject").value; const message = document.getElementById("message").value; // Format mailto link const mailtoLink = mailto:guidecommunity.contacts@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent( "Name: " + name + "\n" + "Email: " + email + "\n\n" + "Message:\n" + message )}; // Open user's email client window.location.href = mailtoLink; } </script> </body> </html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LEVEL UP - Gaming Tournament 2025</title>
+  <link rel="icon" type="image/png" href="LEVEL-UP.png">
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&display=swap" rel="stylesheet">
+<style>
+* {margin:0;padding:0;box-sizing:border-box;}
+body {
+  font-family:'Orbitron',sans-serif;
+  color:#00ffff;
+  background:#010106;
+  overflow-x:hidden;
+  position:relative;
+  min-height:100vh;
+}
+
+/* ===== Animated Background ===== */
+body::before {
+  content:"";
+  position:fixed;
+  top:0;left:0;
+  width:200%;
+  height:200%;
+  background:
+    radial-gradient(circle at 30% 30%,rgba(0,255,255,0.3),transparent 70%),
+    radial-gradient(circle at 70% 70%,rgba(255,0,255,0.3),transparent 70%);
+  animation:move-bg 10s infinite alternate;
+  z-index:-2;
+}
+@keyframes move-bg {
+  from{transform:translate(-10%,-10%) scale(1);}
+  to{transform:translate(10%,10%) scale(1.2);}
+}
+body::after {
+  content:"";
+  position:fixed;inset:0;
+  background:
+    repeating-linear-gradient(0deg,rgba(0,255,255,0.05) 0 1px,transparent 1px 50px),
+    repeating-linear-gradient(90deg,rgba(255,0,255,0.05) 0 1px,transparent 1px 50px);
+  z-index:-1;
+}
+
+/* ===== Header ===== */
+header {
+  text-align:center;
+  padding:50px 20px 30px;
+}
+.logo {
+  width:180px;
+  animation:pulse 3s infinite alternate;
+  filter:drop-shadow(0 0 25px #00ffff);
+}
+@keyframes pulse {
+  from{filter:drop-shadow(0 0 10px #00ffff);}
+  to{filter:drop-shadow(0 0 35px #ff00ff);}
+}
+h1 {
+  font-size:2.5em;
+  margin-top:20px;
+  text-shadow:0 0 25px #00ffff,0 0 50px #0077ff;
+}
+h2 {
+  font-size:1.3em;
+  color:#ff00ff;
+  text-shadow:0 0 20px #ff00ff;
+  margin-top:10px;
+}
+p {
+  font-size:1.1em;
+  color:#fff;
+  margin-top:5px;
+}
+
+/* ===== Centered Countdown ===== */
+#countdown {
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  text-align:center;
+  font-size:1.7em;
+  margin:30px auto;
+  color:#00ffff;
+  text-shadow:0 0 20px #00ffff;
+  animation:glow 2s infinite alternate;
+}
+@keyframes glow {
+  from{text-shadow:0 0 10px #00ffff;}
+  to{text-shadow:0 0 25px #ff00ff;}
+}
+
+/* ===== QR Section ===== */
+.qr {
+  text-align:center;
+  margin:40px auto;
+  padding:25px;
+  width:fit-content;
+  background:rgba(255,255,255,0.07);
+  border-radius:20px;
+  box-shadow:0 0 30px #00ffff;
+  backdrop-filter:blur(5px);
+  transition:0.5s;
+}
+.qr:hover {
+  transform:scale(1.05);
+  box-shadow:0 0 40px #ff00ff;
+}
+.qr h3 {
+  color:#00ffff;
+  margin-bottom:15px;
+}
+
+/* ===== Buttons ===== */
+button, input[type=submit] {
+  margin-top:20px;
+  padding:15px 50px;
+  border:none;
+  border-radius:50px;
+  font-size:1.2em;
+  font-weight:bold;
+  background:linear-gradient(90deg,#00ffff,#0077ff);
+  color:#000;
+  box-shadow:0 0 30px #00ffff;
+  cursor:pointer;
+  transition:0.3s;
+}
+button:hover, input[type=submit]:hover {
+  transform:scale(1.1);
+  box-shadow:0 0 40px #ff00ff;
+  background:linear-gradient(90deg,#ff00ff,#00ffff);
+}
+
+/* ===== Registration Form ===== */
+form {
+  width:90%;
+  max-width:400px;
+  margin:50px auto;
+  background:rgba(255,255,255,0.07);
+  padding:25px;
+  border-radius:20px;
+  box-shadow:0 0 25px #00ffff;
+  backdrop-filter:blur(6px);
+}
+form h3 {
+  color:#ff00ff;
+  margin-bottom:15px;
+  text-shadow:0 0 15px #ff00ff;
+}
+input {
+  width:100%;
+  padding:12px;
+  margin:8px 0;
+  border:none;
+  border-radius:8px;
+  background:rgba(0,0,0,0.6);
+  color:#00ffff;
+  font-size:1em;
+  outline:none;
+  box-shadow:0 0 10px #00ffff inset;
+}
+input:focus { box-shadow:0 0 15px #ff00ff inset; }
+form input[type=submit] { width:100%; margin-top:15px; }
+
+/* ===== Footer ===== */
+footer {
+  text-align:center;
+  color:#aaa;
+  font-size:0.9em;
+  padding:40px 10px 20px;
+  background:rgba(255,255,255,0.05);
+  box-shadow:0 0 20px #00ffff inset;
+  position:relative;
+}
+footer::before {
+  content:"";
+  position:absolute;
+  top:0;
+  left:50%;
+  width:60%;
+  height:1px;
+  background:linear-gradient(90deg,transparent,#00ffff,transparent);
+  transform:translateX(-50%);
+}
+
+/* ===== Responsive ===== */
+@media (max-width:600px){
+  h1{font-size:2em;}
+  .qr{width:80%;}
+  .logo{width:140px;}
+  button,input[type=submit]{width:80%;font-size:1em;}
+}
+        /* Hide default scrollbar */
+        ::-webkit-scrollbar {
+            display: none;
+        }
+</style>
+</head>
+<body>
+
+<header>
+  <!-- Replace with your logo -->
+  <h1>LEVEL UP Gaming Tournament 2025</h1>
+  <h2>Location: Mostar</h2>
+  <p>Date: 12.12.2025</p>
+</header>
+
+<!-- Centered Countdown -->
+<div id="countdown">Loading countdown...</div>
+
+<!-- QR Code Section -->
+<section class="qr">
+  <h3>📱 Scan to Sign Up</h3>
+  <canvas id="qrcode"></canvas>
+</section>
+
+<div style="text-align:center;">
+  <button onclick="window.open('https://www.instagram.com/game_tournaments1','_blank')">
+    Go to Instagram
+  </button>
+</div>
+<div style="text-align:center;">
+  <button onclick="window.open('https://forms.gle/4No5vvWbg5rmR8vN7')">
+    Go to our forum
+  </button>
+</div>
+
+<!-- Registration Form (sends to your email) -->
+<form onsubmit="sendMail(form)">
+    <h3>Register Now</h3>
+    
+    <label for="name">Your Name:</label>
+    <input type="text" id="name" placeholder="Enter your name" required>
+
+    <label for="email">Your Email:</label>
+    <input type="email" id="email" placeholder="Enter your email" required>
+
+    <label for="gametag">Game Tag:</label>
+    <input type="text" id="gametag" placeholder="Enter your game tag" required>
+
+    <button type="submit">Send Registration</button>
+</form>
+
+
+
+<footer>
+  <p>© 2025 LEVEL UP Tournament — All Rights Reserved</p>
+  <p>Follow us for updates and live event coverage.</p>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/qrcode/build/qrcode.min.js"></script>
+<script>
+window.onload = () => {
+  // === QR Code ===
+  const qrCanvas = document.getElementById('qrcode');
+  QRCode.toCanvas(qrCanvas, 'https://www.instagram.com/game_tournaments1', {
+    color: { dark: '#00ffff', light: '#00000000' },
+    width: 200
+  });
+
+  // === Countdown Timer ===
+  const eventDate = new Date("2025-12-12T00:00:00").getTime();
+  const countdown = document.getElementById("countdown");
+  setInterval(() => {
+    const now = new Date().getTime();
+    const distance = eventDate - now;
+    if (distance < 0) {
+      countdown.innerHTML = "🎮 The Tournament Has Started!";
+      return;
+    }
+    const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+    const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+    countdown.innerHTML = `Starts In: ${days}d ${hours}h ${minutes}m ${seconds}s`;
+  }, 1000);
+};
+        function sendMail(form) {
+            const name = document.getElementById("name").value;
+            const email = document.getElementById("email").value;
+            const subject = document.getElementById("subject").value;
+            const message = document.getElementById("message").value;
+
+            // Format mailto link
+            const mailtoLink = `mailto:guidecommunity.contacts@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(
+                "Name: " + name + "\n" +
+                "Email: " + email + "\n\n" +
+                "Message:\n" + message
+            )}`;
+
+            // Open user's email client
+            window.location.href = mailtoLink;
+        }
+</script>
+
+</body>
+</html>
